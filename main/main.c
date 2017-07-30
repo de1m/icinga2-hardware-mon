@@ -48,6 +48,7 @@
 #include "mbedtls/certs.h"
 
 #include "parseResult.h"
+#include "displayWrite.h"
 //#include "config.h"
 
 /* The examples use simple WiFi configuration that you can set via
@@ -326,6 +327,9 @@ static void https_get_task(void *pvParameters)
         	printf("\n########## IC2 Services all ##########\n%d\n", ic2.servall);
         	printf("\n########## IC2 Hosts all ##########\n%d\n", ic2.hostall);
         	foundString = 0;
+        	int stat;
+        	stat = writeIcinga2Stat(ic2);
+
         }
 
 
@@ -361,6 +365,7 @@ static void https_get_task(void *pvParameters)
 void app_main()
 {
     ESP_ERROR_CHECK( nvs_flash_init() );
+    initDisplay();
     initialise_wifi();
     xTaskCreate(&https_get_task, "https_get_task", 8192, NULL, 5, NULL);
 }
