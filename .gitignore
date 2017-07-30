@@ -1,0 +1,7 @@
+build
+paths_exports.xml
+sdkconfig
+sdkconfig.old
+.project
+.cproject
+.settings
